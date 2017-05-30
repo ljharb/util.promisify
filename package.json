@@ -3,7 +3,10 @@
 	"version": "0.0.0",
 	"description": "Polyfill/shim for util.promisify in node versions < v8",
 	"main": "index.js",
-	"dependencies": {},
+	"dependencies": {
+		"define-properties": "^1.1.2",
+		"object.getownpropertydescriptors": "^2.0.3"
+	},
 	"devDependencies": {
 		"@es-shims/api": "^1.2.0",
 		"@ljharb/eslint-config": "^11.0.0",
@@ -14,7 +17,7 @@
 		"prepublish": "safe-publish-latest",
 		"lint": "eslint .",
 		"pretest": "npm run lint",
-		"tests-only": "es-shim-api",
+		"tests-only": "es-shim-api --bound",
 		"test": "npm run tests-only"
 	},
 	"repository": {
