@@ -5,11 +5,13 @@
 	"main": "index.js",
 	"dependencies": {},
 	"devDependencies": {
+		"@es-shims/api": "^1.2.0",
 		"safe-publish-latest": "^1.1.1"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"tests-only": "es-shim-api",
+		"test": "npm run tests-only"
 	},
 	"repository": {
 		"type": "git",
