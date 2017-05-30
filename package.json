@@ -1,0 +1,29 @@
+{
+	"name": "util.promisify",
+	"version": "0.0.0",
+	"description": "Polyfill/shim for util.promisify in node versions < v8",
+	"main": "index.js",
+	"dependencies": {},
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ljharb/util.promisify.git"
+	},
+	"keywords": [
+		"promisify",
+		"promise",
+		"util",
+		"polyfill",
+		"shim",
+		"util.promisify"
+	],
+	"author": "Jordan Harband <ljharb@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ljharb/util.promisify/issues"
+	},
+	"homepage": "https://github.com/ljharb/util.promisify#readme"
+}
