@@ -4,8 +4,11 @@
 	"description": "Polyfill/shim for util.promisify in node versions < v8",
 	"main": "index.js",
 	"dependencies": {},
-	"devDependencies": {},
+	"devDependencies": {
+		"safe-publish-latest": "^1.1.1"
+	},
 	"scripts": {
+		"prepublish": "safe-publish-latest",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
