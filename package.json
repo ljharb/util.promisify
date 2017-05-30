@@ -6,10 +6,14 @@
 	"dependencies": {},
 	"devDependencies": {
 		"@es-shims/api": "^1.2.0",
+		"@ljharb/eslint-config": "^11.0.0",
+		"eslint": "^3.19.0",
 		"safe-publish-latest": "^1.1.1"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
+		"lint": "eslint .",
+		"pretest": "npm run lint",
 		"tests-only": "es-shim-api",
 		"test": "npm run tests-only"
 	},
