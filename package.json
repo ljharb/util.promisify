@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"dependencies": {
 		"define-properties": "^1.1.2",
+		"has-symbols": "^1.0.0",
 		"object.getownpropertydescriptors": "^2.0.3"
 	},
 	"devDependencies": {

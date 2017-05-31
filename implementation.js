@@ -19,7 +19,7 @@ var slice = Function.call.bind(Array.prototype.slice);
 var concat = Function.call.bind(Array.prototype.concat);
 var forEach = Function.call.bind(Array.prototype.forEach);
 
-var hasSymbols = typeof Symbol === 'function' && typeof Symbol('') === 'symbol';
+var hasSymbols = require('has-symbols')();
 
 var kCustomPromisifiedSymbol = hasSymbols ? Symbol('util.promisify.custom') : null;
 var kCustomPromisifyArgsSymbol = hasSymbols ? Symbol('customPromisifyArgs') : null;
