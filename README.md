@@ -22,3 +22,7 @@ const util = require('util');
 ```
 
 Note: this package requires a native ES5 environment, and for `Promise` to be globally available. It will throw upon requiring it if these are not present.
+
+## Promisifying modules
+
+If you want to promisify a whole module, like the `fs` module, you can use [`util.promisify-all`](https://www.npmjs.com/package/util.promisify-all).
