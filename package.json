@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Polyfill/shim for util.promisify in node versions < v8",
 	"main": "index.js",
+	"types": "index.d.ts",
 	"dependencies": {
 		"define-properties": "^1.1.2",
 		"has-symbols": "^1.0.0",
