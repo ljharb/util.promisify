@@ -7,9 +7,18 @@ This package provides the built-in `util.promisify` in node v8.0.0 and later, an
 
 ## Usage
 
+**Direct**
 ```js
-const promisify = require('util.promisify')
-// Use `promisify` just like the built-in
+const promisify = require('util.promisify');
+// Use `promisify` just like the built-in method on `util`
+```
+
+**Shim**
+```js
+require('util.promisify/shim')();
+// `util.promisify` is now defined
+const util = require('util');
+// Use `util.promisify`
 ```
 
 Note: this package requires a native ES5 environment, and for `Promise` to be globally available. It will throw upon requiring it if these are not present.
