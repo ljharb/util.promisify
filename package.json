@@ -10,9 +10,9 @@
 	},
 	"devDependencies": {
 		"@es-shims/api": "^2.1.2",
-		"@ljharb/eslint-config": "^13.0.0",
-		"eslint": "^5.7.0",
-		"safe-publish-latest": "^1.1.2"
+		"@ljharb/eslint-config": "^15.0.2",
+		"eslint": "^6.7.1",
+		"safe-publish-latest": "^1.1.4"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
