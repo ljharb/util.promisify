@@ -6,3 +6,7 @@ import:
  - ljharb/travis-ci:node/all.yml
  - ljharb/travis-ci:node/pretest.yml
  - ljharb/travis-ci:node/posttest.yml
+matrix:
+  allow_failures:
+    - node_js: "0.10"
+    - node_js: "0.8"
