@@ -15,9 +15,11 @@ if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
 }
 
-var slice = Function.call.bind(Array.prototype.slice);
-var concat = Function.call.bind(Array.prototype.concat);
-var forEach = Function.call.bind(Array.prototype.forEach);
+var callBound = require('es-abstract/helpers/callBound');
+
+var $slice = callBound('Array.prototype.slice');
+var $concat = callBound('Array.prototype.concat');
+var $forEach = callBound('Array.prototype.forEach');
 
 var hasSymbols = require('has-symbols')();
 
@@ -51,16 +53,16 @@ module.exports = function promisify(orig) {
 	var argumentNames = orig[kCustomPromisifyArgsSymbol];
 
 	var promisified = function fn() {
-		var args = slice(arguments);
+		var args = $slice(arguments);
 		var self = this; // eslint-disable-line no-invalid-this
 		return new Promise(function (resolve, reject) {
-			orig.apply(self, concat(args, function (err) {
-				var values = arguments.length > 1 ? slice(arguments, 1) : [];
+			orig.apply(self, $concat(args, function (err) {
+				var values = arguments.length > 1 ? $slice(arguments, 1) : [];
 				if (err) {
 					reject(err);
 				} else if (typeof argumentNames !== 'undefined' && values.length > 1) {
 					var obj = {};
-					forEach(argumentNames, function (name, index) {
+					$forEach(argumentNames, function (name, index) {
 						obj[name] = values[index];
 					});
 					resolve(obj);
