@@ -1,12 +1,12 @@
 'use strict';
 
 var isES5 = typeof Object.defineProperty === 'function'
-	&& typeof Object.defineProperties === 'function'
-	&& typeof Object.getPrototypeOf === 'function'
-	&& typeof Object.setPrototypeOf === 'function';
+	&& typeof Object.defineProperties === 'function';
 
-if (!isES5) {
-	throw new TypeError('util.promisify requires a true ES5 environment');
+var hasProto = [].__proto__ === Array.prototype; // eslint-disable-line no-proto
+
+if (!isES5 || !hasProto) {
+	throw new TypeError('util.promisify requires a true ES5 environment, that also supports `__proto__`');
 }
 
 var getOwnPropertyDescriptors = require('object.getownpropertydescriptors');
@@ -73,7 +73,7 @@ module.exports = function promisify(orig) {
 		});
 	};
 
-	Object.setPrototypeOf(promisified, Object.getPrototypeOf(orig));
+	promisified.__proto__ = orig.__proto__; // eslint-disable-line no-proto
 
 	Object.defineProperty(promisified, kCustomPromisifiedSymbol, {
 		configurable: true,
