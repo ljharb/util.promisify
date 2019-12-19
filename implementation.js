@@ -9,7 +9,7 @@ if (!isES5) {
 	throw new TypeError('util.promisify requires a true ES5 environment');
 }
 
-var getOwnPropertyDescriptors = require('object.getownpropertydescriptors');
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 
 if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
@@ -19,10 +19,20 @@ var slice = Function.call.bind(Array.prototype.slice);
 var concat = Function.call.bind(Array.prototype.concat);
 var forEach = Function.call.bind(Array.prototype.forEach);
 
-var hasSymbols = require('has-symbols')();
+var hasSymbols = typeof global.Symbol !== 'function';
 
 var kCustomPromisifiedSymbol = hasSymbols ? Symbol('util.promisify.custom') : null;
 var kCustomPromisifyArgsSymbol = hasSymbols ? Symbol('customPromisifyArgs') : null;
+
+var getOwnPropertyDescriptors = function _getOwnPropertyDescriptors(obj) {
+	var out = {};
+	var keys = Object.keys(obj);
+
+	for (var index = 0; index < keys.length; index++) {
+		out[keys[index]] = getOwnPropertyDescriptor(obj, keys[index]);
+	}
+	return out;
+};
 
 module.exports = function promisify(orig) {
 	if (typeof orig !== 'function') {
