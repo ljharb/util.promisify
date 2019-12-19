@@ -12,7 +12,7 @@
 		"@es-shims/api": "^2.1.2",
 		"@ljharb/eslint-config": "^15.0.2",
 		"auto-changelog": "^1.16.2",
-		"eslint": "^6.7.1",
+		"eslint": "^6.7.2",
 		"safe-publish-latest": "^1.1.4"
 	},
 	"scripts": {
