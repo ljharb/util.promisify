@@ -11,9 +11,9 @@
 	},
 	"devDependencies": {
 		"@es-shims/api": "^2.1.2",
-		"@ljharb/eslint-config": "^15.0.2",
+		"@ljharb/eslint-config": "^15.1.0",
 		"auto-changelog": "^1.16.2",
-		"eslint": "^6.7.2",
+		"eslint": "^6.8.0",
 		"safe-publish-latest": "^1.1.4"
 	},
 	"scripts": {
