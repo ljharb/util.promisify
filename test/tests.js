@@ -1,5 +1,7 @@
 'use strict';
 
+var hasSymbols = require('has-symbols')();
+
 module.exports = function runTests(promisify, t) {
 	t.equal(typeof promisify, 'function', 'promisify is a function');
 
@@ -40,5 +42,13 @@ module.exports = function runTests(promisify, t) {
 		return p.then(null, function (args) {
 			st.deepEqual(args, [1, 2, 3], 'rejection: arguments are preserved');
 		});
+	});
+
+	t.test('custom symbol', { skip: !hasSymbols }, function (st) {
+		st.equal(Symbol.keyFor(promisify.custom), 'nodejs.util.promisify.custom', 'is a global symbol with the right key');
+		// eslint-disable-next-line no-restricted-properties
+		st.equal(Symbol['for']('nodejs.util.promisify.custom'), promisify.custom, 'is the global symbol');
+
+		st.end();
 	});
 };

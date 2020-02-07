@@ -24,7 +24,8 @@ var $forEach = callBound('Array.prototype.forEach');
 
 var hasSymbols = require('has-symbols')();
 
-var kCustomPromisifiedSymbol = hasSymbols ? Symbol('util.promisify.custom') : null;
+// eslint-disable-next-line no-restricted-properties
+var kCustomPromisifiedSymbol = hasSymbols ? Symbol['for']('nodejs.util.promisify.custom') : null;
 var kCustomPromisifyArgsSymbol = hasSymbols ? Symbol('customPromisifyArgs') : null;
 
 module.exports = function promisify(orig) {
