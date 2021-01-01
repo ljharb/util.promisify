@@ -9,7 +9,8 @@
 
 	"rules": {
 		"id-length": [2, { "max": 30 }],
-		"max-statements": [2, 16],
+		"max-lines": [2, 90],
+		"max-statements": [2, 18],
 		"multiline-comment-style": 0,
 		"no-magic-numbers": 0,
 		"operator-linebreak": [2, "before"]

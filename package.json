@@ -20,10 +20,11 @@
 	"scripts": {
 		"prepublish": "safe-publish-latest",
 		"lint": "eslint .",
+		"postlint": "es-shim-api --bound",
 		"pretest": "npm run lint",
-		"tests-only": "es-shim-api --bound",
+		"tests-only": "exit 1",
 		"test": "npm run tests-only",
-		"posttest": "npx aud --production",
+		"posttest": "aud --production",
 		"version": "auto-changelog && git add CHANGELOG.md",
 		"postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
 	},
