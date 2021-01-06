@@ -1,7 +1,8 @@
 'use strict';
 
-var isES5 = typeof Object.defineProperty === 'function'
-	&& typeof Object.defineProperties === 'function';
+var forEach = require('for-each');
+
+var isES5 = typeof Object.defineProperty === 'function';
 
 var hasProto = [].__proto__ === Array.prototype; // eslint-disable-line no-proto
 
@@ -81,7 +82,15 @@ module.exports = function promisify(orig) {
 		value: promisified,
 		writable: false
 	});
-	return Object.defineProperties(promisified, getOwnPropertyDescriptors(orig));
+	var descriptors = getOwnPropertyDescriptors(orig);
+	forEach(descriptors, function (k, v) {
+		try {
+			Object.defineProperty(promisified, k, v);
+		} catch (e) {
+			// handle nonconfigurable function properties
+		}
+	});
+	return promisified;
 };
 
 module.exports.custom = kCustomPromisifiedSymbol;
