@@ -16,14 +16,16 @@
 		"aud": "^1.1.1",
 		"auto-changelog": "^2.0.0",
 		"eslint": "^6.8.0",
-		"safe-publish-latest": "^1.1.4"
+		"nyc": "^10.3.2",
+		"safe-publish-latest": "^1.1.4",
+		"tape": "^5.1.1"
 	},
 	"scripts": {
 		"prepublish": "safe-publish-latest",
 		"lint": "eslint .",
 		"postlint": "es-shim-api --bound",
 		"pretest": "npm run lint",
-		"tests-only": "exit 1",
+		"tests-only": "nyc tape 'test/**/*.js'",
 		"test": "npm run tests-only",
 		"posttest": "aud --production",
 		"version": "auto-changelog && git add CHANGELOG.md",
