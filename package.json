@@ -1,6 +1,6 @@
 {
 	"name": "util.promisify",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Polyfill/shim for util.promisify in node versions < v8",
 	"main": "index.js",
 	"dependencies": {
