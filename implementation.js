@@ -16,7 +16,7 @@ if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
 }
 
-var callBound = require('es-abstract/helpers/callBound');
+var callBound = require('call-bind/callBound');
 
 var $slice = callBound('Array.prototype.slice');
 var $concat = callBound('Array.prototype.concat');
