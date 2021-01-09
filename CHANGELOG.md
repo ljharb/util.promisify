@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.1](https://github.com/ljharb/util.promisify/compare/v1.1.0...v1.1.1) - 2021-01-08
+
+### Commits
+
+- [Fix] add missing runtime dependency `has-symbols` [`9b45a3b`](https://github.com/ljharb/util.promisify/commit/9b45a3bfbc0bcf5e474e1d045aacca3dc9609e54)
+
 ## [v1.1.0](https://github.com/ljharb/util.promisify/compare/v1.0.1...v1.1.0) - 2021-01-06
 
 ### Commits
