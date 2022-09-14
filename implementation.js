@@ -4,10 +4,12 @@ var forEach = require('for-each');
 
 var isES5 = typeof Object.defineProperty === 'function';
 
-var hasProto = require('has-proto')();
+var gPO = Object.getPrototypeOf;
+var sPO = Object.setPrototypeOf;
+var hasProto = require('has-proto')() || (typeof gPO === 'function' && gPO([]) === Array.prototype);
 
 if (!isES5 || !hasProto) {
-	throw new TypeError('util.promisify requires a true ES5 environment, that also supports `__proto__`');
+	throw new TypeError('util.promisify requires a true ES5+ environment, that also supports `__proto__` and/or `Object.getPrototypeOf`');
 }
 
 var getOwnPropertyDescriptors = require('object.getownpropertydescriptors');
@@ -85,7 +87,11 @@ module.exports = function promisify(orig) {
 		});
 	};
 
-	promisified.__proto__ = orig.__proto__; // eslint-disable-line no-proto
+	if (typeof sPO === 'function' && typeof gPO === 'function') {
+		sPO(promisified, gPO(orig));
+	} else {
+		promisified.__proto__ = orig.__proto__; // eslint-disable-line no-proto
+	}
 
 	oDP(promisified, kCustomPromisifiedSymbol, {
 		configurable: true,
