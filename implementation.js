@@ -4,7 +4,7 @@ var forEach = require('for-each');
 
 var isES5 = typeof Object.defineProperty === 'function';
 
-var hasProto = [].__proto__ === Array.prototype; // eslint-disable-line no-proto
+var hasProto = require('has-proto')();
 
 if (!isES5 || !hasProto) {
 	throw new TypeError('util.promisify requires a true ES5 environment, that also supports `__proto__`');
@@ -20,9 +20,8 @@ var safeConcat = require('safe-array-concat');
 var callBound = require('call-bind/callBound');
 
 var $slice = callBound('Array.prototype.slice');
-var $forEach = callBound('Array.prototype.forEach');
 
-var hasSymbols = require('has-symbols')();
+var hasSymbols = require('has-symbols/shams')();
 
 // eslint-disable-next-line no-restricted-properties
 var kCustomPromisifiedSymbol = hasSymbols ? Symbol['for']('nodejs.util.promisify.custom') : null;
@@ -64,7 +63,7 @@ module.exports = function promisify(orig) {
 					reject(err);
 				} else if (typeof argumentNames !== 'undefined' && values.length > 1) {
 					var obj = {};
-					$forEach(argumentNames, function (name, index) {
+					forEach(argumentNames, function (name, index) {
 						obj[name] = values[index];
 					});
 					resolve(obj);

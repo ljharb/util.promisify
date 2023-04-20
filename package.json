@@ -41,6 +41,7 @@
 		"call-bind": "^1.0.2",
 		"define-properties": "^1.2.0",
 		"for-each": "^0.3.3",
+		"has-proto": "^1.0.1",
 		"has-symbols": "^1.0.3",
 		"object.getownpropertydescriptors": "^2.1.6",
 		"safe-array-concat": "^1.0.0"
