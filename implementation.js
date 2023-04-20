@@ -16,10 +16,10 @@ if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
 }
 
+var safeConcat = require('safe-array-concat');
 var callBound = require('call-bind/callBound');
 
 var $slice = callBound('Array.prototype.slice');
-var $concat = callBound('Array.prototype.concat');
 var $forEach = callBound('Array.prototype.forEach');
 
 var hasSymbols = require('has-symbols')();
@@ -58,7 +58,7 @@ module.exports = function promisify(orig) {
 		var args = $slice(arguments);
 		var self = this; // eslint-disable-line no-invalid-this
 		return new Promise(function (resolve, reject) {
-			orig.apply(self, $concat(args, function (err) {
+			orig.apply(self, safeConcat(args, function (err) {
 				var values = arguments.length > 1 ? $slice(arguments, 1) : [];
 				if (err) {
 					reject(err);
