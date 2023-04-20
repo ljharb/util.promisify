@@ -39,10 +39,10 @@
 	"homepage": "https://github.com/ljharb/util.promisify#readme",
 	"dependencies": {
 		"call-bind": "^1.0.2",
-		"define-properties": "^1.1.4",
+		"define-properties": "^1.2.0",
 		"for-each": "^0.3.3",
 		"has-symbols": "^1.0.3",
-		"object.getownpropertydescriptors": "^2.1.4"
+		"object.getownpropertydescriptors": "^2.1.6"
 	},
 	"devDependencies": {
 		"@es-shims/api": "^2.3.1",
