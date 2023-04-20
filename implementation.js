@@ -16,6 +16,10 @@ if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
 }
 
+var oDP = Object.defineProperty;
+var $Promise = Promise;
+var $TypeError = TypeError;
+
 var safeConcat = require('safe-array-concat');
 var callBound = require('call-bind/callBound');
 
@@ -29,18 +33,25 @@ var kCustomPromisifyArgsSymbol = hasSymbols ? Symbol('customPromisifyArgs') : nu
 
 module.exports = function promisify(orig) {
 	if (typeof orig !== 'function') {
-		var error = new TypeError('The "original" argument must be of type function');
-		error.name = 'TypeError [ERR_INVALID_ARG_TYPE]';
+		var error = new $TypeError('The "original" argument must be of type function');
 		error.code = 'ERR_INVALID_ARG_TYPE';
+		error.toString = function value() {
+			return this.name + '[' + this.code + ']: ' + this.message;
+		};
 		throw error;
 	}
 
 	if (hasSymbols && orig[kCustomPromisifiedSymbol]) {
 		var customFunction = orig[kCustomPromisifiedSymbol];
 		if (typeof customFunction !== 'function') {
-			throw new TypeError('The [util.promisify.custom] property must be a function');
+			var customError = $TypeError('The [util.promisify.custom] property must be of type function.');
+			customError.code = 'ERR_INVALID_ARG_TYPE';
+			customError.toString = function value() {
+				return this.name + '[' + this.code + ']: ' + this.message;
+			};
+			throw customError;
 		}
-		Object.defineProperty(customFunction, kCustomPromisifiedSymbol, {
+		oDP(customFunction, kCustomPromisifiedSymbol, {
 			configurable: true,
 			enumerable: false,
 			value: customFunction,
@@ -56,7 +67,7 @@ module.exports = function promisify(orig) {
 	var promisified = function fn() {
 		var args = $slice(arguments);
 		var self = this; // eslint-disable-line no-invalid-this
-		return new Promise(function (resolve, reject) {
+		return new $Promise(function (resolve, reject) {
 			orig.apply(self, safeConcat(args, function (err) {
 				var values = arguments.length > 1 ? $slice(arguments, 1) : [];
 				if (err) {
@@ -76,7 +87,7 @@ module.exports = function promisify(orig) {
 
 	promisified.__proto__ = orig.__proto__; // eslint-disable-line no-proto
 
-	Object.defineProperty(promisified, kCustomPromisifiedSymbol, {
+	oDP(promisified, kCustomPromisifiedSymbol, {
 		configurable: true,
 		enumerable: false,
 		value: promisified,
@@ -85,7 +96,7 @@ module.exports = function promisify(orig) {
 	var descriptors = getOwnPropertyDescriptors(orig);
 	forEach(descriptors, function (k, v) {
 		try {
-			Object.defineProperty(promisified, k, v);
+			oDP(promisified, k, v);
 		} catch (e) {
 			// handle nonconfigurable function properties
 		}
