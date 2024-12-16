@@ -6,6 +6,7 @@ var isES5 = typeof Object.defineProperty === 'function';
 
 var gPO = Object.getPrototypeOf;
 var sPO = Object.setPrototypeOf;
+// eslint-disable-next-line global-require
 var hasProto = require('has-proto')() || (typeof gPO === 'function' && gPO([]) === Array.prototype);
 
 if (!isES5 || !hasProto) {
