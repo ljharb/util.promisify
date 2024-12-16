@@ -38,7 +38,7 @@
 	},
 	"homepage": "https://github.com/ljharb/util.promisify#readme",
 	"dependencies": {
-		"call-bind": "^1.0.8",
+		"call-bound": "^1.0.3",
 		"define-properties": "^1.2.1",
 		"for-each": "^0.3.3",
 		"has-proto": "^1.2.0",

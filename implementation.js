@@ -24,7 +24,7 @@ var $Promise = Promise;
 var $TypeError = TypeError;
 
 var safeConcat = require('safe-array-concat');
-var callBound = require('call-bind/callBound');
+var callBound = require('call-bound');
 
 var $slice = callBound('Array.prototype.slice');
 
