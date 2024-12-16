@@ -3,16 +3,23 @@ name: 'Tests: node --disable-proto=throw'
 on: [pull_request, push]
 
 jobs:
-  tests:
+  throw:
     uses: ljharb/actions/.github/workflows/node.yml@main
     with:
       range: '>= 12.17'
       type: minors
-      command: 'NODE_OPTIONS="--disable-proto=throw" npx tape "test/**/*.js"'
+      command: "NODE_OPTIONS='--disable-proto=throw' npx tape 'tests/**/*.js'"
+
+  delete:
+    uses: ljharb/actions/.github/workflows/node.yml@main
+    with:
+      range: '>= 12.17'
+      type: minors
+      command: "NODE_OPTIONS='--disable-proto=delete' npx tape 'tests/**/*.js'"
 
   node:
-    name: 'node --disable-proto=throw'
-    needs: [tests]
+    name: 'node --disable-proto'
+    needs: [throw, delete]
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo tests completed'
+      - run: true
