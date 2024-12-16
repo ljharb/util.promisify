@@ -2,10 +2,12 @@
 
 var forEach = require('for-each');
 
-var isES5 = typeof Object.defineProperty === 'function';
+var $Object = require('es-object-atoms');
 
-var gPO = Object.getPrototypeOf;
-var sPO = Object.setPrototypeOf;
+var isES5 = typeof $Object.defineProperty === 'function';
+
+var gPO = $Object.getPrototypeOf;
+var sPO = $Object.setPrototypeOf;
 // eslint-disable-next-line global-require
 var hasProto = require('has-proto')() || (typeof gPO === 'function' && gPO([]) === Array.prototype);
 
@@ -19,12 +21,16 @@ if (typeof Promise !== 'function') {
 	throw new TypeError('`Promise` must be globally available for util.promisify to work.');
 }
 
-var oDP = Object.defineProperty;
-var $Promise = Promise;
+var GetIntrinsic = require('get-intrinsic');
+
+var oDP = $Object.defineProperty;
+var $Promise = GetIntrinsic('%Promise%');
 var $TypeError = TypeError;
 
 var safeConcat = require('safe-array-concat');
+var callBind = require('call-bind');
 var callBound = require('call-bound');
+var defineDataProperty = require('define-data-property');
 
 var $slice = callBound('Array.prototype.slice');
 
@@ -54,12 +60,15 @@ module.exports = function promisify(orig) {
 			};
 			throw customError;
 		}
-		oDP(customFunction, kCustomPromisifiedSymbol, {
-			configurable: true,
-			enumerable: false,
-			value: customFunction,
-			writable: false
-		});
+		defineDataProperty(
+			customFunction,
+			kCustomPromisifiedSymbol,
+			customFunction,
+			true,
+			true,
+			null,
+			true
+		);
 		return customFunction;
 	}
 
@@ -67,11 +76,13 @@ module.exports = function promisify(orig) {
 	// arguments, e.g. ['stdout', 'stderr'] for child_process.exec.
 	var argumentNames = orig[kCustomPromisifyArgsSymbol];
 
+	var origApply = callBind.apply(orig);
+
 	var promisified = function fn() {
 		var args = $slice(arguments);
 		var self = this; // eslint-disable-line no-invalid-this
 		return new $Promise(function (resolve, reject) {
-			orig.apply(self, safeConcat(args, function (err) {
+			origApply(self, safeConcat(args, function (err) {
 				var values = arguments.length > 1 ? $slice(arguments, 1) : [];
 				if (err) {
 					reject(err);
@@ -94,12 +105,8 @@ module.exports = function promisify(orig) {
 		promisified.__proto__ = orig.__proto__; // eslint-disable-line no-proto
 	}
 
-	oDP(promisified, kCustomPromisifiedSymbol, {
-		configurable: true,
-		enumerable: false,
-		value: promisified,
-		writable: false
-	});
+	defineDataProperty(promisified, kCustomPromisifiedSymbol, promisified, true, true, null, true);
+
 	var descriptors = getOwnPropertyDescriptors(orig);
 	forEach(descriptors, function (k, v) {
 		try {
