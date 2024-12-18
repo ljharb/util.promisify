@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.3](https://github.com/ljharb/util.promisify/compare/v1.1.2...v1.1.3) - 2024-12-18
+
+### Commits
+
+- [Robustness]: use `call-bind`, `define-data-property`, `es-errors`, `es-object-atoms`, `get-intrinsic` [`f3b4baa`](https://github.com/ljharb/util.promisify/commit/f3b4baaebf234621f88af5dd4b5513b4be540d97)
+- [actions] split out node 10-20, and 20+ [`fda95ae`](https://github.com/ljharb/util.promisify/commit/fda95ae91df65fef2c4909a54a2cf26ddb3bdf5d)
+- [Tests] test with both disable-proto options [`509cfcb`](https://github.com/ljharb/util.promisify/commit/509cfcbe5d869e0b1a867ebd78acb86138e156ad)
+- [Dev Deps] update `@es-shims/api`, `@ljharb/eslint-config`, `auto-changelog`, `npmignore`, `tape` [`3712bb5`](https://github.com/ljharb/util.promisify/commit/3712bb5ae38f0dc86a198d7fb61a0c225c1bce20)
+- [Deps] update `call-bind`, `has-proto`, `has-symbols`, `object.getownpropertydescriptors`, `safe-array-concat` [`4d1441e`](https://github.com/ljharb/util.promisify/commit/4d1441e0d9cd3ecd92954d8d6bf9ed2a6989f594)
+- [Deps] update `define-properties`, `object.getownpropertydescriptors`, `safe-array-concat` [`47a969e`](https://github.com/ljharb/util.promisify/commit/47a969e5e202be2f0978cc21028831bc34151d52)
+- [Refactor] use `call-bound` directly [`48dba6c`](https://github.com/ljharb/util.promisify/commit/48dba6c1dbe3edb7c8b03515836711924b68f5e8)
+- [Dev Deps] update `aud`, `tape` [`7aa0c21`](https://github.com/ljharb/util.promisify/commit/7aa0c21777de3e0eb72db07cbb599239fdf9699e)
+- [Dev Deps] update `@es-shims/api`, `@ljharb/eslint-config` [`0817cfd`](https://github.com/ljharb/util.promisify/commit/0817cfde128e90a8722533118e2adee28aac87fd)
+- [meta] add missing `engines.node` [`9d08241`](https://github.com/ljharb/util.promisify/commit/9d082412e7063c22d98504d73028782a3b67ca73)
+- [Tests] replace `aud` with `npm audit` [`cf287ac`](https://github.com/ljharb/util.promisify/commit/cf287aca6a4b33d629254173b7d9f2c6ad3e9eed)
+- [Dev Deps] add missing peer dep [`fb9e435`](https://github.com/ljharb/util.promisify/commit/fb9e435973d1d773c59c3b3f906ca80d7ceda894)
+
 ## [v1.1.2](https://github.com/ljharb/util.promisify/compare/v1.1.1...v1.1.2) - 2023-04-20
 
 ### Fixed
